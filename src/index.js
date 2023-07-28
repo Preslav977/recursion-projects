@@ -36,3 +36,70 @@ const recursiveFibonacci = (firstNum, secondNum = [0, 1]) => {
 };
 
 console.log(recursiveFibonacci(8));
+
+// implemented algorithm merge sort using recursion
+// the function merge is helper function
+// which takes two arrays as parameters
+// then creating new variables using spread operator
+// to save what elements the two arrays has
+// using i, j as indexes to increment
+// while looping though both arrays length
+// checking if the firstArray has smaller elements
+// if it does push them into the new array
+// else push the secondArray elements
+// then using two loops to push the remaining
+// elements the if statement is no longer true
+// that why it will not "ignore" the other elements
+// that are not pushed
+
+function merge(firstArray, secondArray) {
+  const firstArrayCopy = [...firstArray];
+  const secondArrayCopy = [...secondArray];
+  let i = 0;
+  let j = 0;
+
+  const newArray = [];
+
+  while (i < firstArrayCopy.length && j < secondArrayCopy.length) {
+    if (firstArrayCopy[i] < secondArrayCopy[j]) {
+      newArray.push(firstArrayCopy[i++]);
+    } else {
+      newArray.push(secondArray[j++]);
+    }
+  }
+
+  for (; i < firstArrayCopy.length; i++) {
+    newArray.push(firstArrayCopy[i]);
+  }
+
+  for (; j < secondArrayCopy.length; j++) {
+    newArray.push(secondArrayCopy[j]);
+  }
+  return newArray;
+}
+
+// mergeSort takes an parameter
+// since using recursion there is a need for base case
+// the base case here is if there is one element return
+// since there is no need to sort one elements in the mergeSort algorithm
+// else find the mid point of the array
+// create variables for the left subarray
+// and the right subarray
+// another two variables which will divide the fourth element arrays
+// in this cate to two elements and then to one
+// and merge the sorted result of the two halves
+// into one sort array
+
+function mergeSort(array) {
+  if (array.length === 1) {
+    return array;
+  }
+  const middle = array.length / 2;
+  const leftHalf = array.slice(0, middle);
+  const rightHalf = array.slice(middle);
+  const divideLeftHalf = mergeSort(leftHalf);
+  const divideRightHalf = mergeSort(rightHalf);
+  return merge(divideLeftHalf, divideRightHalf);
+}
+
+console.log(mergeSort([5, 17, 71, 12, 66, 9, 0, 1]));
