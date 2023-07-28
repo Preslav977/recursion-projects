@@ -16,3 +16,23 @@ function imperativeFibonacci(num) {
 }
 
 console.log(imperativeFibonacci(8));
+
+// fibonacci implemented recursive
+// using as parameters that will point to the
+// first and second element of the array
+// with condition that check if the secondNum length is bigger and
+// equal to the firstNum return the secondNum
+// else return the firstNum and the secondNum using spread operator
+// that will copy the elements of the secondNum which will calculate
+// the sum of the secondNum length - 2 and the secondNum length - 1
+// which will return the previous numbers of fibonacci sequence
+
+const recursiveFibonacci = (firstNum, secondNum = [0, 1]) => {
+  if (secondNum.length >= firstNum) return secondNum;
+  return recursiveFibonacci(firstNum, [
+    ...secondNum,
+    secondNum[secondNum.length - 2] + secondNum[secondNum.length - 1],
+  ]);
+};
+
+console.log(recursiveFibonacci(8));
